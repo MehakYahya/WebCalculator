@@ -1,28 +1,49 @@
+
+
+<body>
+<div class="calculatorScreen">
+  <div class="theme-numbers">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+  </div>
+  <div class="theme-switch">
+    <p>THEME</p>
+
+    <div class="switch-container">
+      <div class="switch-circle"></div>
+    </div>
+  </div>
 <div class="calculator">
-  <div class="display">{{ displayValue }}</div>
+  <input type="text" formControlName="input" class="display" readonly />
+</div>
+  </div>
 
   <div class="buttons">
+    <div class="btn">
     <button (click)="appendValue('7')">7</button>
     <button (click)="appendValue('8')">8</button>
     <button (click)="appendValue('9')">9</button>
-<button (click)="delete()">DEL</button>
+    <button class="del" (click)="delete()">DEL</button>
 
     <button (click)="appendValue('4')">4</button>
     <button (click)="appendValue('5')">5</button>
     <button (click)="appendValue('6')">6</button>
-    <button (click)="appendValue('*')">*</button>
+    <button (click)="appendValue('+')">+</button>
 
     <button (click)="appendValue('1')">1</button>
     <button (click)="appendValue('2')">2</button>
     <button (click)="appendValue('3')">3</button>
     <button (click)="appendValue('-')">-</button>
 
-    <button (click)="appendValue('0')">0</button>
     <button (click)="appendValue('.')">.</button>
-    <button (click)="calculateResult()">=</button>
+    <button (click)="appendValue('0')">0</button>
     <button (click)="appendValue('/')">/</button>
+      <button (click)="appendValue('*')">x</button>
 
-  </div>
-  <button class="resetBtn"(click)="reset()">RESET</button>
+  <button class="resetBtn" (click)="reset()">RESET</button>
+      <button class="equal" (click)="calculateResult()">=</button>
+  <div class="title">{{ appTitle }}</div>
 </div>
-
+  </div>
+</body>
