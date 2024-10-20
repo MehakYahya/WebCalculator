@@ -1,31 +1,57 @@
 import { Component } from '@angular/core';
-import {CalculatorService} from './calculator.service';
+import { CalculatorService } from './calculator.service';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  standalone: true,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  imports: [
+    NgClass
+  ],
+  standalone: true
 })
 export class AppComponent {
-public displayValue: string | undefined;
+  displayValue: string = '';
+  appTitle: string = 'Calculator';
 
-  constructor(private calculatorService: CalculatorService) { }
 
-  appendValue(value: string): void {
-  this.calculatorService.append(value);
-  this.displayValue=this.calculatorService.getExpression();
+  constructor(private calculatorService: CalculatorService) {}
+
+  appendValue(value: string) {
+    if (this.calculatorService.isOperator(value) && this.calculatorService.isOperator(this.displayValue.slice(-1))) {
+      return;
+    }
+
+    if (value === '.' && this.calculatorService.containsDot(this.displayValue)) {
+      return;
+    }
+
+    this.displayValue += value;
   }
 
-  calculateResult(): void{
-    this.displayValue=this.calculatorService.calculate();
+  calculateResult() {
+    if (!this.calculatorService.validateExpression(this.displayValue)) {
+      this.displayValue = 'Error';
+      return;
+    }
+
+    try {
+      this.displayValue = this.calculatorService.evaluateExpression(this.displayValue);
+    } catch (e) {
+      this.displayValue = 'Error';
+    }
   }
-  reset(): void {
-    this.calculatorService.reset();
-    this.displayValue='';
+  
+
+  reset() {
+    this.displayValue = '';
   }
-  delete(): void {
-    this.calculatorService.delete();
-    this.displayValue=this.calculatorService.getExpression();
+  delete() {
+    this.displayValue = this.displayValue.slice(0, -1);
+    if (this.displayValue === '') {
+      this.displayValue = '';
+    }
   }
+
 }
