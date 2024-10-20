@@ -42,7 +42,7 @@ export class AppComponent {
       this.displayValue = 'Error';
     }
   }
-  
+
 
   reset() {
     this.displayValue = '';

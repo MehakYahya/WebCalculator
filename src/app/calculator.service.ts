@@ -1,38 +1,29 @@
 import { Injectable } from '@angular/core';
-import {AppSettings} from './app.config';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalculatorService {
 
-private apiUrl=AppSettings.apiUrl;
-constructor (){
-  console.log(' Api Url:',this.apiUrl);
-}
-
-private expression: string='';
-append(value: string): void{
-  this.expression += value;
-}
-getExpression(): string {
-  return this.expression;
-}
-calculate():string{
-  try{
-    const result=eval(this.expression);
-    this.expression=result.toString();
-    return this.expression;
-
-  }catch(e){
-    return 'Error';
+  evaluateExpression(expression: string): string {
+    try {
+      const result = eval(expression);
+      return result.toString();
+    } catch (error) {
+      throw new Error('Invalid expression');
+    }
   }
-}
 
-reset():void{
-  this.expression='';
-}
-delete():void {
-  this.expression=this.expression.slice(0, -1);
-}
+  isOperator(character: string): boolean {
+    return ['+', '-', '*', '/'].includes(character);
+  }
+
+  containsDot(value: string): boolean {
+    return value.includes('.');
+  }
+
+  validateExpression(expression: string): boolean {
+    const ope = /^[0-9+\-*/.() ]+$/;
+    return ope.test(expression);
+  }
 }
