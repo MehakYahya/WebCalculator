@@ -19,8 +19,11 @@ export class CalculatorService {
   }
 
   containsDot(value: string): boolean {
-    return value.includes('.');
+    const parts = value.split(/[+\-*/]/);
+    const lastPart = parts[parts.length - 1];
+    return lastPart.includes('.');
   }
+
 
   validateExpression(expression: string): boolean {
     const ope = /^[0-9+\-*/.() ]+$/;
