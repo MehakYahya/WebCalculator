@@ -20,7 +20,7 @@ export class FormatNumberPipe implements PipeTransform {
     integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     if (decimalPart) {
-      decimalPart = decimalPart.substring(0, 2);
+      decimalPart = decimalPart.substring(0, 4);
       return `${integerPart}.${decimalPart}`;
     }
 
