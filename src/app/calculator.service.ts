@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,6 +19,7 @@ export class CalculatorService {
     return ['+', '-', '*', '/'].includes(character);
   }
 
+
   containsDot(value: string): boolean {
     const parts = value.split(/[+\-*/]/);
     const lastPart = parts[parts.length - 1];
@@ -29,4 +31,6 @@ export class CalculatorService {
     const ope = /^[0-9+\-*/.() ]+$/;
     return ope.test(expression);
   }
+
+
 }
