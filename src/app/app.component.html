@@ -1,5 +1,3 @@
-
-
 <body>
 <div class="calculatorScreen">
   <div class="theme-numbers">
@@ -10,18 +8,18 @@
   <div class="theme-switch">
     <h1>calc</h1>
     <p>THEME</p>
-
     <div class="switch-container">
       <div class="switch-circle"></div>
     </div>
   </div>
-<div class="calculator">
-  <input type="text" formControlName="input" class="display" readonly />
-</div>
-  </div>
 
-  <div class="buttons">
-    <div class="btn">
+  <div class="calculator">
+    <input type="text" [value]="displayValue | formatNumber" class="display" readonly />
+  </div>
+</div>
+
+<div class="buttons">
+  <div class="btn">
     <button (click)="appendValue('7')">7</button>
     <button (click)="appendValue('8')">8</button>
     <button (click)="appendValue('9')">9</button>
@@ -40,11 +38,10 @@
     <button (click)="appendValue('.')">.</button>
     <button (click)="appendValue('0')">0</button>
     <button (click)="appendValue('/')">/</button>
-      <button (click)="appendValue('*')">x</button>
+    <button (click)="appendValue('*')">x</button>
 
-  <button class="resetBtn" (click)="reset()">RESET</button>
-      <button class="equal" (click)="calculateResult()">=</button>
-  <div class="title">{{ appTitle }}</div>
-</div>
+    <button class="resetBtn" (click)="reset()">RESET</button>
+    <button class="equal" (click)="calculateResult()">=</button>
   </div>
+</div>
 </body>
